@@ -1,0 +1,13 @@
+name: daily-et
+version: 0.1.0
+
+authors:
+  - Hengle Jiang <jianghengle@gmail.com>
+
+targets:
+  daily-et:
+    main: src/daily-et.cr
+
+crystal: 0.27.0
+
+license: MIT
