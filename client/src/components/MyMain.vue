@@ -59,6 +59,7 @@
                   input-class="date-picker-input"
                   format="yyyy-MM-dd"
                   :value="date"
+                  :disabled="dateDisabled"
                   v-on:selected="dateSelected">
                 </datepicker>
                 <a class="button" @click="selectNextDate">
@@ -282,7 +283,23 @@ export default {
         value = ys[this.day - this.growingDays[0]]
       }
       return [xs, ys, line, value]
-    }
+    },
+    dateDisabled () {
+      if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
+        return {}
+      var yearEt = this.activeSite.et[this.year]
+      var dates = []
+      var start = new Date(this.year, 0, 1)
+      var count = this.year % 4 ? 366 : 365
+      for(var i=0;i<count;i++){
+        var doy = 1 + i
+        if(yearEt[doy] == undefined){
+          var date = new Date(start.getTime() + 86400000 * i)
+          dates.push(date)
+        }
+      }
+      return {dates: dates}
+    },
   },
   watch: {
     weekEt: function (val) {
