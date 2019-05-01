@@ -45,6 +45,7 @@ $primary: #0e485a;
 $navbar-height: 117px;
 $navbar-item-hover-color: #0e485a;
 @import "~bulma";
+@import "~c3/c3.css";
 
 body {
   font-family: Futura-pt,Futura PT,Trebuchet MS,Arial,sans-serif;
