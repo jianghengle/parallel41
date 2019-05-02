@@ -30,7 +30,7 @@
     <div class="container data-window" v-if="activeSite">
       <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Site</label>
+          <label class="label">Station</label>
         </div>
         <div class="field-body">
           <div class="field">
@@ -80,7 +80,7 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <div class="input is-static">{{dayEt ? dayEt : 'Not Available'}}</div>
+              <div class="input is-static">{{dayEt ? dayEt + ' mm/day' : 'Not Available'}}</div>
             </div>
           </div>
         </div>
@@ -88,7 +88,7 @@
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">ET over last 7 days</label>
+          <label class="label">Value over last 7 days</label>
         </div>
         <div class="field-body">
           <div class="field">
@@ -107,34 +107,22 @@
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Accum. Value of Growing Season</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <div class="input is-static">{{(growingEt && growingEt[3]) ? growingEt[3] : 'Not Available'}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Charts</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <div class="control">
               <div class="chart-container">
                 <div id="weekChart"></div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">Accum. Value of Growing Season ({{growingSeason[0] + ' ~ ' + growingSeason[1]}})</label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <div class="input is-static">{{(growingEt && growingEt[3]) ? growingEt[3] + ' mm/day' : 'Not Available'}}</div>
               <div class="chart-container">
                 <div id="growingChart"></div>
               </div>
@@ -201,7 +189,7 @@ export default {
         }
       },
       activeSite: null,
-      growingSeason: ['01-05', '05-15']
+      growingSeason: ['05-01', '09-15']
     }
   },
   computed: {
@@ -217,6 +205,10 @@ export default {
     day () {
       return Math.ceil((this.date - new Date(this.year, 0, 1)) / 86400000)
     },
+    isoDate () {
+      if(this.date)
+        return DateForm(this.date, "isoDate")
+    },
     dayEt () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
         return
@@ -230,7 +222,7 @@ export default {
       var yearEt = this.activeSite.et[this.year]
       var xs = []
       var ys = []
-      for(var i=0;i<=7;i++){
+      for(var i=0;i<7;i++){
         var day = this.day - i
         if(day <= 0)
           break
@@ -266,11 +258,11 @@ export default {
         var date = new Date(new Date(this.year, 0, 1).getTime() + 86400000 * (day - 1))
         xs.push(DateForm(date, "isoDate"))
         if(yearEt[day]){
-          sum = Math.round(sum + yearEt[day][2] * 1000)/1000
-          ys.push(sum)
+          sum += yearEt[day][2]
+          ys.push(Math.round(sum * 1000)/1000)
           nonzero = day - this.growingDays[0]
         }else{
-          ys.push(sum)
+          ys.push(Math.round(sum * 1000)/1000)
         }
       }
       for(var i=nonzero+1;i<ys.length;i++){
@@ -335,7 +327,7 @@ export default {
           var line = lines[i]
           if(line.length){
             var d = lines[i].split('\t')
-            d[2] = Math.round(d[2] * 1000) / 1000
+            d[2] = parseFloat(d[2])
             data[d[1]] = d
           }
         }
@@ -388,7 +380,7 @@ export default {
               }
             },
             y: {
-              label: {text: 'Avg. Daily ET', position: 'outer-middle'}
+              label: {text: 'Average Daily ET (mm/day)'}
             },
           }
         })
@@ -419,7 +411,7 @@ export default {
             }
           },
           y: {
-            label: {text: 'Accumulated Value of Growing Season', position: 'outer-middle'}
+            label: {text: 'Accumulated Value of Growing Season'}
           },
         },
         grid: {x: {lines: lines}}

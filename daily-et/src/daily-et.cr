@@ -13,13 +13,13 @@ module DailyEt
 
     def add_data(t, data)
       value = data.to_f
-      @et[t] = value unless value.nan?
+      @et[t] = (value / 28.4) unless value.nan?
     end
 
     def average
       return 0.0 if @et.empty?
       values = @et.values
-      values.sum / values.size
+      (values.sum / values.size).round(3)
     end
   end
 
@@ -44,6 +44,7 @@ module DailyEt
       doy_index = 0
       time_index = 0
       data_index = 0
+      qc_index = 0
       lines.each do |line|
         columns = line.split("\t")
         next if columns.empty?
@@ -53,7 +54,8 @@ module DailyEt
             date_index = i if s.strip == "date"
             time_index = i if s.strip == "time"
             doy_index = i if s.strip == "DOY"
-            data_index = i if s.strip == "H"
+            data_index = i if s.strip == "LE"
+            qc_index = i if s.strip == "qc_LE"
           end
         end
 
@@ -63,8 +65,9 @@ module DailyEt
           time = columns[time_index]
           doy = columns[doy_index]
           data = columns[data_index]
+          qc = columns[qc_index].to_i?
           et[date] = DayEt.new(date, doy) unless @et.has_key? date
-          et[date].add_data(time, data)
+          et[date].add_data(time, data) if ((!qc.nil?) && qc < 2)
         end
       end
     end
