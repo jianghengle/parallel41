@@ -88,7 +88,7 @@
 
       <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Value over last 7 days</label>
+          <label class="label">Values over last 7 days</label>
         </div>
         <div class="field-body">
           <div class="field">
