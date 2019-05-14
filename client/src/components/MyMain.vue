@@ -367,6 +367,9 @@ export default {
       }else{
         this.weekChart = c3.generate({
           bindto: '#weekChart',
+          padding: {
+            right: 20,
+          },
           data: {
             x: 'x',
             columns: columns,
@@ -375,12 +378,13 @@ export default {
             x: {
               type: 'timeseries',
               tick: {
-                count: 4,
                 format: '%Y-%m-%d'
               }
             },
             y: {
-              label: {text: 'Average Daily ET (mm/day)'}
+              label: {
+                text: 'mm/day',
+              }
             },
           }
         })
@@ -397,6 +401,9 @@ export default {
 
       this.growingChart = c3.generate({
         bindto: '#growingChart',
+        padding: {
+          right: 20,
+        },
         data: {
           x: 'x',
           columns: columns,
@@ -411,7 +418,9 @@ export default {
             }
           },
           y: {
-            label: {text: 'Accumulated Value of Growing Season'}
+            label: {
+              text: 'mm/day',
+            }
           },
         },
         grid: {x: {lines: lines}}
@@ -457,6 +466,7 @@ export default {
 .et-value {
   max-width: 100px;
   overflow: hidden;
+  text-align: center;
 }
 
 .chart-container {
