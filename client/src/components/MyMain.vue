@@ -203,11 +203,7 @@ export default {
       return this.date.getFullYear()
     },
     day () {
-      return Math.ceil((this.date - new Date(this.year, 0, 1)) / 86400000)
-    },
-    isoDate () {
-      if(this.date)
-        return DateForm(this.date, "isoDate")
+      return this.dateToDay (this.date)
     },
     dayEt () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
@@ -226,7 +222,8 @@ export default {
         var day = this.day - i
         if(day <= 0)
           break
-        var date = new Date(new Date(this.year, 0, 1).getTime() + 86400000 * (day - 1))
+
+        var date = this.dayToDate(this.year, day)
         xs.unshift(DateForm(date, "isoDate"))
         if(yearEt[day]){
           ys.unshift(yearEt[day][2])
@@ -239,10 +236,10 @@ export default {
     growingDays () {
       var start = this.growingSeason[0].split('-')
       var startDate = new Date(this.year, start[0]-1, start[1], 1)
-      var startDay = Math.ceil((startDate - new Date(this.year, 0, 1)) / 86400000)
+      var startDay = this.dateToDay(startDate)
       var end = this.growingSeason[1].split('-')
       var endDate = new Date(this.year, end[0]-1, end[1], 1)
-      var endDay = Math.ceil((endDate - new Date(this.year, 0, 1)) / 86400000)
+      var endDay = this.dateToDay(endDate)
       return [startDay, endDay]
     },
     growingEt () {
@@ -255,7 +252,7 @@ export default {
       var nonzero = -1
       for(var i=this.growingDays[0];i<=this.growingDays[1];i++){
         var day = i
-        var date = new Date(new Date(this.year, 0, 1).getTime() + 86400000 * (day - 1))
+        var date = this.dayToDate(this.year, day)
         xs.push(DateForm(date, "isoDate"))
         if(yearEt[day]){
           sum += yearEt[day][2]
@@ -335,6 +332,15 @@ export default {
       }, response => {
         this.error = 'Failed to get data!'
       })
+    },
+    dateToDay (date) {
+      var year = date.getFullYear()
+      var month = date.getMonth()
+      var day = date.getDate()
+      return Math.ceil((new Date(year, month, day, 12) - new Date(year, 0, 1)) / 86400000)
+    },
+    dayToDate (year, day) {
+      return new Date(new Date(year, 0, 1, 12).getTime() + 86400000 * (day - 1))
     },
     mapCenterChanged (center) {
       this.newMapCenter = {lat: center.lat(), lng: center.lng()}
