@@ -51,13 +51,15 @@
           </div>
           <div class="content text-content">
             <h4 id="quickStart" class="p-header">Parallel 41 Quick Start Guide (In Development)
-              <a href="static/GloDET Quick Start Guide.pdf" class="button is-text" download>link</a>
             </h4>
           </div>
           <div class="content text-content">
-            <h4 id="stepByStep" class="p-header">Step-by-Step Guide to Flux Measurements
-              <a href="static/Step-by-Step Guide to Flux Measurements.pdf" class="button is-text" download>link</a>
+            <h4 id="stepByStep" class="p-header">Excerpt from Step-by-Step Guide to Flux Measurements
+              <a href="https://www.licor.com/env/products/eddy_covariance/ec_book.html" class="button is-text" target="_blank">Full text link</a>
             </h4>
+            <div class="pdf-container">
+              <iframe class="doc" :src="iframeSource"></iframe>
+            </div>
           </div>
           <div class="content text-content">
             <h4 id="terms" class="p-header">Parallel 41 Terms and Conditions
@@ -86,7 +88,7 @@ export default {
       rendering: false,
       timeoutId: null,
       pageLabel: '',
-      iframeSource: 'https://docs.google.com/gview?url=https://parallel41.nebraska.edu/static/Step-by-Step Guide to Flux Measurements.pdf&embedded=true',
+      iframeSource: 'https://docs.google.com/gview?url=https://parallel41.nebraska.edu/static/Excerpt from Step-by-Step Guide to Flux Measurements.pdf&embedded=true',
       termsSource: 'https://docs.google.com/gview?url=https://parallel41.nebraska.edu/static/Parallel 41 Terms and Conditions.pdf&embedded=true'
     }
   },
