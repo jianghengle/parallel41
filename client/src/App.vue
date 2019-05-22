@@ -75,4 +75,8 @@ body {
   font-size: 1rem;
 }
 
+.c3-region.regionX {
+  fill: red;
+}
+
 </style>

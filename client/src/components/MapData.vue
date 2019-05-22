@@ -101,10 +101,14 @@
           </tr>
 
           <tr>
-            <th>Graph of Daily ET Values for Date Selected and Previous Seven Days</th>
+            <th>
+              Graph of Daily ET Values for Date Selected and Previous
+              <input class="input is-small pre-days-input" type="number" v-model="previousDays">
+              Days
+            </th>
             <td>
               <div class="chart-container">
-                <div id="weekChart"></div>
+                <div id="previousChart"></div>
               </div>
             </td>
           </tr>
@@ -127,7 +131,6 @@
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 </template>
@@ -159,8 +162,6 @@ var site1 = {
   infoOpened: false,
   image: 'static/sites/ne01.jpg',
   et: {},
-  weekChart: null,
-  growingChart: null
 }
 site1.info = makeInfo(site1)
 
@@ -186,7 +187,10 @@ export default {
       },
       activeSite: null,
       growingSeason: ['05-01', '09-15'],
-      unit: 'mm/day'
+      unit: 'mm/day',
+      previousDays: 7,
+      previousChart: null,
+      growingChart: null
     }
   },
   computed: {
@@ -209,13 +213,13 @@ export default {
       if(dayEt)
         return this.unit == "mm/day" ? dayEt[2] : Math.round((dayEt[2] / 25.4) * 1000)/1000
     },
-    weekEt () {
+    previousEt () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
         return
       var yearEt = this.activeSite.et[this.year]
       var xs = []
       var ys = []
-      for(var i=0;i<7;i++){
+      for(var i=0;i<this.previousDays;i++){
         var day = this.day - i
         if(day <= 0)
           break
@@ -228,7 +232,17 @@ export default {
           ys.unshift(null)
         }
       }
+
       return [xs, ys]
+    },
+    weekEt () {
+      if(!this.previousEt)
+        return
+      var len = this.previousEt[0].length
+      if(len <= 7)
+        return this.previousEt
+      var diff = len - 7
+      return [this.previousEt[0].slice(diff), this.previousEt[1].slice(diff)]
     },
     growingDays () {
       var start = this.growingSeason[0].split('-')
@@ -247,17 +261,31 @@ export default {
       var ys = []
       var sum = 0.0
       var nonzero = -1
+      var regions = []
+      var regionStart = false
       for(var i=this.growingDays[0];i<=this.growingDays[1];i++){
         var day = i
         var date = this.dayToDate(this.year, day)
         xs.push(DateForm(date, "isoDate"))
-        if(yearEt[day]){
+        if(yearEt[day] != undefined){
           sum += this.unit == "mm/day" ? yearEt[day][2] : (yearEt[day][2] / 25.4)
           ys.push(Math.round(sum * 1000)/1000)
           nonzero = day - this.growingDays[0]
+          regionStart = false
         }else{
           ys.push(Math.round(sum * 1000)/1000)
+          if(regionStart){
+            var lastRegion = regions[regions.length - 1]
+            lastRegion[1] = DateForm(date, "isoDate")
+          }else{
+            var region = [DateForm(date, "isoDate"), DateForm(date, "isoDate")]
+            regions.push(region)
+            regionStart = true
+          }
         }
+      }
+      if(regionStart){
+        regions.pop()
       }
       for(var i=nonzero+1;i<ys.length;i++){
         ys[i] = null
@@ -268,7 +296,7 @@ export default {
         line = DateForm(this.date, "isoDate")
         value = ys[this.day - this.growingDays[0]]
       }
-      return [xs, ys, line, value]
+      return [xs, ys, line, value, regions]
     },
     dateDisabled () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
@@ -288,10 +316,10 @@ export default {
     },
   },
   watch: {
-    weekEt: function (val) {
+    previousEt: function (val) {
       if(val){
         this.$nextTick(function(){
-          this.drawWeekEt()
+          this.drawPreviousEt()
         })
       }
     },
@@ -359,17 +387,17 @@ export default {
       var date = new Date(this.date.getTime() + 86400000)
       this.dateSelected(date)
     },
-    drawWeekEt () {
-      var columns = [this.weekEt[0].slice(0), this.weekEt[1].slice(0)]
+    drawPreviousEt () {
+      var columns = [this.previousEt[0].slice(0), this.previousEt[1].slice(0)]
       columns[0].unshift('x')
       columns[1].unshift('Daily ET')
-      if(this.weekChart){
-        this.weekChart.load({
+      if(this.previousChart){
+        this.previousChart.load({
           columns: columns
         })
       }else{
-        this.weekChart = c3.generate({
-          bindto: '#weekChart',
+        this.previousChart = c3.generate({
+          bindto: '#previousChart',
           padding: {
             right: 20,
           },
@@ -381,6 +409,7 @@ export default {
             x: {
               type: 'timeseries',
               tick: {
+                count: 7,
                 format: '%Y-%m-%d'
               }
             }
@@ -396,6 +425,9 @@ export default {
       if (this.growingEt[2]) {
         lines = [{value: this.growingEt[2], text: this.growingEt[2]}]
       }
+      var regions = this.growingEt[4].map(function(r){
+        return {start: r[0], end: r[1], class: 'regionX'}
+      })
 
       this.growingChart = c3.generate({
         bindto: '#growingChart',
@@ -416,12 +448,12 @@ export default {
             }
           }
         },
-        grid: {x: {lines: lines}}
+        grid: {x: {lines: lines}},
+        regions: regions
       })
     }
   },
   mounted () {
-    
   }
 }
 </script>
@@ -440,6 +472,7 @@ export default {
   th {
     border-width: 0px;
     border-bottom-width: 0px!important;
+    white-space: nowrap;
   }
   td {
     border-width: 0px;
@@ -454,5 +487,11 @@ export default {
   width: 100%;
   margin-top: 10px;
 }
+
+.pre-days-input {
+  width: 55px;
+}
+
+
 
 </style>

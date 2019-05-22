@@ -53,17 +53,11 @@
             <h4 id="quickStart" class="p-header">Parallel 41 Quick Start Guide (In Development)
               <a href="static/GloDET Quick Start Guide.pdf" class="button is-text" download>link</a>
             </h4>
-            <div class="pdf-container">
-              
-            </div>
           </div>
           <div class="content text-content">
             <h4 id="stepByStep" class="p-header">Step-by-Step Guide to Flux Measurements
               <a href="static/Step-by-Step Guide to Flux Measurements.pdf" class="button is-text" download>link</a>
             </h4>
-            <div class="pdf-container">
-              <iframe class="doc" :src="iframeSource"></iframe>
-            </div>
           </div>
           <div class="content text-content">
             <h4 id="terms" class="p-header">Parallel 41 Terms and Conditions
