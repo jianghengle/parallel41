@@ -9,6 +9,9 @@
         </div>
 
         <div class="top-bar-right">
+          <router-link class="top-bar-item" :to="'/help'">
+            <span class="nav-icon"><icon name="question"></icon></span>Help
+          </router-link>
           <router-link v-if="!token" class="top-bar-item" :to="'/login'">
             <span class="nav-icon"><icon name="sign-in"></icon></span>Login
           </router-link>
@@ -46,7 +49,7 @@
             Partners & Projects
           </router-link>
           <router-link class="navbar-item menu-item" :to="'/help'">
-            Help
+            Producer Dashboard
           </router-link>
         </div>
       </div>
@@ -145,7 +148,7 @@ export default {
     }
 
     .top-bar-item {
-      margin-left: 10px;
+      margin-left: 20px;
       color: white;
       font-size: 12pt;
       font-weight: 600;

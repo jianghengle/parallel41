@@ -66,12 +66,12 @@
             <td>
               <div class="control">
                 <label class="radio">
-                  <input type="radio" value="mm/day" v-model="unit">
-                  mm/day
+                  <input type="radio" value="mm" v-model="unit">
+                  mm
                 </label>
                 <label class="radio">
-                  <input type="radio" value="inches/day" v-model="unit">
-                  inches/day
+                  <input type="radio" value="inches" v-model="unit">
+                  inches
                 </label>
               </div>
             </td>
@@ -187,7 +187,7 @@ export default {
       },
       activeSite: null,
       growingSeason: ['05-01', '09-15'],
-      unit: 'mm/day',
+      unit: 'mm',
       previousDays: 7,
       previousChart: null,
       growingChart: null
@@ -210,8 +210,10 @@ export default {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
         return
       var dayEt = this.activeSite.et[this.year][this.day]
-      if(dayEt)
-        return this.unit == "mm/day" ? dayEt[2] : Math.round((dayEt[2] / 25.4) * 1000)/1000
+      if(dayEt){
+        dayEt = this.unit == "mm" ? dayEt[2] : (dayEt[2] / 25.4)
+        return this.twoDigits(dayEt)
+      }
     },
     previousEt () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
@@ -227,7 +229,8 @@ export default {
         var date = this.dayToDate(this.year, day)
         xs.unshift(DateForm(date, "isoDate"))
         if(yearEt[day]){
-          ys.unshift(this.unit == "mm/day" ? yearEt[day][2] : Math.round((yearEt[day][2] / 25.4) * 1000)/1000)
+          var y = this.unit == "mm" ? yearEt[day][2] : (yearEt[day][2] / 25.4)
+          ys.unshift(this.twoDigits(y))
         }else{
           ys.unshift(null)
         }
@@ -268,12 +271,12 @@ export default {
         var date = this.dayToDate(this.year, day)
         xs.push(DateForm(date, "isoDate"))
         if(yearEt[day] != undefined){
-          sum += this.unit == "mm/day" ? yearEt[day][2] : (yearEt[day][2] / 25.4)
-          ys.push(Math.round(sum * 1000)/1000)
+          sum += this.unit == "mm" ? yearEt[day][2] : (yearEt[day][2] / 25.4)
+          ys.push(this.twoDigits(sum))
           nonzero = day - this.growingDays[0]
           regionStart = false
         }else{
-          ys.push(Math.round(sum * 1000)/1000)
+          ys.push(this.twoDigits(sum))
           if(regionStart){
             var lastRegion = regions[regions.length - 1]
             lastRegion[1] = DateForm(date, "isoDate")
@@ -412,6 +415,10 @@ export default {
                 count: 7,
                 format: '%Y-%m-%d'
               }
+            },
+            y: {
+              min: 0,
+              padding: {bottom:0}
             }
           }
         })
@@ -451,6 +458,18 @@ export default {
         grid: {x: {lines: lines}},
         regions: regions
       })
+    },
+    twoDigits (val) {
+      if(val == 0)
+        return 0
+      var v = val < 0 ? (-val) : val
+      var scale = 1
+      while(v < 0.1){
+        scale *= 10
+        v *= 10
+      }
+      v = Math.round(v * 100)/(100*scale)
+      return val < 0 ? (-v) : v
     }
   },
   mounted () {

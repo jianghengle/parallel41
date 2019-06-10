@@ -3,14 +3,14 @@
     <footer class="footer">
       <div class="container">
         <div class="content has-text-centered">
-          <a href="http://waterforfood.nebraska.edu/"><img src="static/logos/DWFI.png" width="250" class="logo dwfi"></a>
-          <a href="https://irrigationinnovation.org/"><img src="static/logos/IIC.png" width="250" class="logo"></a>
-          <a href="https://www.licor.com/"><img src="static/logos/LiCOR.png" width="250" class="logo"></a>
+          <a href="http://waterforfood.nebraska.edu/" target="_blank"><img src="static/logos/DWFI.png" width="250" class="logo dwfi"></a>
+          <a href="https://irrigationinnovation.org/" target="_blank"><img src="static/logos/IIC.png" width="250" class="logo"></a>
+          <a href="https://www.licor.com/" target="_blank"><img src="static/logos/LiCOR.png" width="250" class="logo"></a>
         </div>
         <div class="content has-text-centered">
-          <a href="https://www.climate.com/"><img src="static/logos/TCC.png" width="250" class="logo"></a>
-          <a href="https://www.nebraskawaterbalance.com/"><img src="static/logos/NEWBA.png" width="100" class="logo newba"></a>
-          <a href="https://www.urnrd.org/"><img src="static/logos/URNRD.png" width="250" class="logo"></a>
+          <a href="https://www.climate.com/" target="_blank"><img src="static/logos/TCC.png" width="250" class="logo"></a>
+          <a href="https://www.nebraskawaterbalance.com/" target="_blank"><img src="static/logos/NEWBA.png" width="100" class="logo newba"></a>
+          <a href="https://www.urnrd.org/" target="_blank"><img src="static/logos/URNRD.png" width="250" class="logo"></a>
         </div>
       </div>
     </footer>
