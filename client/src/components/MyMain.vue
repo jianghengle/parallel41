@@ -3,7 +3,7 @@
     <div class="content">
       <h4 class="p-header">Welcome to the Parallel 41 Flux Network</h4>
       <div>
-        <p>Parallel 41 is a free portal to view and download real-time evapotranspiration (ET) datasets across the mid-western United States. The data is collected by the latest generation of smart flux towers manufactured by LiCOR Biosciences. Datasets may be downloaded at 30 minute time intervals, or as daily averages.</p>
+        <p>Parallel 41 is a free portal to view and download real-time evapotranspiration (ET) datasets across the mid-western United States. The data is collected by the latest generation of smart flux towers manufactured by LI-COR Biosciences. Datasets may be downloaded at 30 minute time intervals, or as daily averages.</p>
 
         <p>Applications of this data include measurements of crop water use, assessment of plant water stress, drought monitoring, irrigation scheduling, and basin-wide water accounting and water productivity analysis.</p>
 

@@ -28,7 +28,7 @@
         </div>
 
         <h6 class="p-section">Measuring Evapotranspiration</h6>
-        <p>Advanced equipment and sensors, such as the SmartFlux eddy covariance towers developed by LiCOR Biosciences, can accurately measure ET at point locations. This information, for different crop types and climate conditions in the U.S., is consolidated in the Parallel 41 Flux Network, a geographic collection of flux towers. The name Parallel 41 comes from latitude line 41 north, which runs east to west across the central United States, corresponding to the study area and a region of significant food production.</p>
+        <p>Advanced equipment and sensors, such as the SmartFlux eddy covariance towers developed by LI-COR Biosciences, can accurately measure ET at point locations. This information, for different crop types and climate conditions in the U.S., is consolidated in the Parallel 41 Flux Network, a geographic collection of flux towers. The name Parallel 41 comes from latitude line 41 north, which runs east to west across the central United States, corresponding to the study area and a region of significant food production.</p>
         <p>Satellite-based remote sensing can also calculate ET across hundreds of miles using mathematical models to produce physical-based ET estimates at 30-meter (~100ft) resolution. Daily ET calculations across many countries, including the United States, Brazil, India and the Middle East and North Africa region, are freely available through the <a href="https://glodet.nebraska.edu" target="_blank">Global Daily Evapotranspiration (GloDET) website</a>, a partner site to this Parallel 41 website.</p>
         <p>Combining the Parallel 41 Flux Network with the Global Daily Evapotranspiration dataset provides reliable, high-quality spatial information on daily crop water use (ET), in inches or millimeters per day, anchored by flux tower validation points (Figure 3).</p>
 
@@ -80,7 +80,7 @@
               </div>
               <div class="column" style="margin: auto;">
                 <strong>George Burba, Ph.D.</strong><br/>
-                Science & Strategy Fellow, LiCOR Biosciences; Global Fellow, Daugherty Water for Food Global Institute
+                Science & Strategy Fellow, LI-COR Biosciences; Global Fellow, Daugherty Water for Food Global Institute
               </div>
             </div>
           </div>
