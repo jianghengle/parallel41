@@ -8,13 +8,15 @@
         style="width: 100%"
         :style="{'height': mapHeightPx}"
       >
-      <gmap-marker
-          v-for="(m, i) in sites"
-          :key="'m-' + i"
-          :position="m.position"
-          :clickable="true"
-          @click="openSite(i)">
-        </gmap-marker>
+        <gmap-cluster :zoomOnClick="true">
+          <gmap-marker
+            v-for="(m, i) in sites"
+            :key="'m-' + i"
+            :position="m.position"
+            :clickable="true"
+            @click="openSite(i)">
+          </gmap-marker>
+        </gmap-cluster>
         <gmap-info-window
           v-for="(m, i) in sites"
           :key="'i-' + i"
@@ -165,6 +167,42 @@ var site1 = {
 }
 site1.info = makeInfo(site1)
 
+var site2 = {
+  name: 'Mead NE 01',
+  abbr: 'Mead1',
+  location: 'ENREC, Mead, NE',
+  position: { lat: 41.165, lng: -96.477 },
+  ecosystem: 'Irrigated continuous maize',
+  elevation: '345.9 m',
+  infoOpened: false,
+  et: {},
+}
+site2.info = makeInfo(site2)
+
+var site3 = {
+  name: 'Mead NE 02',
+  abbr: 'Mead2',
+  location: 'ENREC, Mead, NE',
+  position: { lat: 41.165, lng: -96.470 },
+  ecosystem: 'Irrigated maize-soybean rotation',
+  elevation: '349.8 m',
+  infoOpened: false,
+  et: {},
+}
+site3.info = makeInfo(site3)
+
+var site4 = {
+  name: 'Mead NE 03',
+  abbr: 'Mead3',
+  location: 'ENREC, Mead, NE',
+  position: { lat: 41.18, lng: -96.440 },
+  ecosystem: 'Rainfed maize-soybean rotation',
+  elevation: '354.4 m',
+  infoOpened: false,
+  et: {},
+}
+site4.info = makeInfo(site4)
+
 
 export default {
   name: 'map-data',
@@ -178,7 +216,7 @@ export default {
       newMapCenter: {lat: 40.8, lng: 97.6},
       mapZoom: 6,
       date: new Date(Date.now() - 86400000),
-      sites: [site1],
+      sites: [site1, site2, site3, site4],
       infoOptions: {
         pixelOffset: {
           width: 0,
@@ -190,7 +228,7 @@ export default {
       unit: 'mm',
       previousDays: 7,
       previousChart: null,
-      growingChart: null
+      growingChart: null,
     }
   },
   computed: {

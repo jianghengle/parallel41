@@ -45,6 +45,9 @@ Vue.use(VueGoogleMaps, {
   }
 })
 
+import GmapCluster from 'vue2-google-maps/dist/components/cluster'
+Vue.component('GmapCluster', GmapCluster)
+
 Vue.component('ground-overlay', VueGoogleMaps.MapElementFactory({
   mappedProps: {
     'opacity': {}
