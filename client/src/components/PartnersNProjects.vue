@@ -51,6 +51,10 @@
                 +1 402.770-6737
               </td>
             </tr>
+            <tr>
+              <th>URNRD Project Objectives:</th>
+              <td><a href="static/URNRD Project Objectives.pdf" target="_blank">URNRD Project Objectives.pdf</a></td>
+            </tr>
 
             <tr>
               <td class="my-seperator"></td>
