@@ -175,6 +175,7 @@ var site2 = {
   ecosystem: 'Irrigated continuous maize',
   elevation: '345.9 m',
   infoOpened: false,
+  image: 'static/sites/Mead NE 01.jpg',
   et: {},
 }
 site2.info = makeInfo(site2)
@@ -187,6 +188,7 @@ var site3 = {
   ecosystem: 'Irrigated maize-soybean rotation',
   elevation: '349.8 m',
   infoOpened: false,
+  image: 'static/sites/Mead NE 02.jpg',
   et: {},
 }
 site3.info = makeInfo(site3)
@@ -199,6 +201,7 @@ var site4 = {
   ecosystem: 'Rainfed maize-soybean rotation',
   elevation: '354.4 m',
   infoOpened: false,
+  image: 'static/sites/Mead NE 03.jpg',
   et: {},
 }
 site4.info = makeInfo(site4)
