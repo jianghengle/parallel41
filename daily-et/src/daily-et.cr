@@ -66,8 +66,10 @@ module DailyEt
           doy = columns[doy_index]
           data = columns[data_index]
           qc = columns[qc_index].to_i?
-          et[date] = DayEt.new(date, doy) unless @et.has_key? date
-          et[date].add_data(time, data) if ((!qc.nil?) && qc < 2)
+          if date.starts_with? @year
+            et[date] = DayEt.new(date, doy) unless @et.has_key? date
+            et[date].add_data(time, data) if ((!qc.nil?) && qc < 2)
+          end
         end
       end
     end

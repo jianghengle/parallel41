@@ -7,6 +7,8 @@ authors:
 targets:
   daily-et:
     main: src/daily-et.cr
+  reference-et:
+    main: src/reference-et.cr
 
 crystal: 0.27.0
 
