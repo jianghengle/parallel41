@@ -23,8 +23,10 @@ module ReferenceEt
       @ref = nil
       if old_data.has_key? @date
         old_ss = old_data[@date].split("\t")
-        @ref = old_ss[4].to_f if (old_ss.size > 4 && !old_ss[4].empty?)
-        @ref_location = old_ss[5] if (old_ss.size > 5)
+        if (old_ss.size > 4 && !old_ss[4].empty? && old_ss[4].strip != "0.0")
+          @ref = old_ss[4].to_f
+          @ref_location = old_ss[5] if (old_ss.size > 5)
+        end
       end
       get_reference if @ref.nil?
     end
