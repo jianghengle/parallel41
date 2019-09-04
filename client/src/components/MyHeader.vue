@@ -39,17 +39,20 @@
 
       <div class="navbar-menu" :class="{'is-active': menuActive}">
         <div class="navbar-end">
-          <router-link class="navbar-item menu-item" :to="'/about'">
+          <router-link class="navbar-item menu-item" :class="{'active-menu': routePath=='/'}" :to="'/'">
+            Home
+          </router-link>
+          <router-link class="navbar-item menu-item" :class="{'active-menu': routePath=='/about'}" :to="'/about'">
             About
           </router-link>
-          <router-link class="navbar-item menu-item" :to="'/documentation'">
-            Documentation
+          <router-link class="navbar-item menu-item" :class="{'active-menu': routePath=='/map-data'}" :to="'/map-data'">
+            Flux Stations
           </router-link>
-          <router-link class="navbar-item menu-item" :to="'/partners_n_projects'">
-            Partners & Projects
-          </router-link>
-          <router-link class="navbar-item menu-item" :to="'/help'">
+          <router-link class="navbar-item menu-item" :class="{'active-menu': routePath=='/help'}" :to="'/help'">
             Producer Dashboard
+          </router-link>
+          <router-link class="navbar-item menu-item" :class="{'active-menu': routePath=='/documentation'}" :to="'/documentation'">
+            Resources
           </router-link>
         </div>
       </div>
@@ -205,6 +208,10 @@ export default {
   font-family: futura-pt-condensed,Futura PT Cond,futura-lt-condensed,sans-serif;
   font-size: 18px;
   font-weight: bold;
+}
+
+.active-menu {
+  background-color: hsl(0, 0%, 96%);
 }
 
 .color-seperator{

@@ -30,13 +30,11 @@
     </div>
 
     <div class="container data-window" v-if="activeSite">
+      <div class="station-title">
+        {{activeSite.name}}
+      </div>
       <table class="table is-fullwidth data-table">
         <tbody>
-          <tr>
-            <th>Station</th>
-            <td>{{activeSite.name}}</td>
-          </tr>
-
           <tr>
             <th>Date</th>
             <td>
@@ -80,12 +78,12 @@
           </tr>
 
           <tr>
-            <th>Daily ET Value</th>
-            <td>{{dayEt ? dayEt + ' ' + unit : 'Not Available'}}</td>
+            <th>Daily Measured ET (ETc) Value</th>
+            <td>{{dayEt[0] ? dayEt[0] + ' ' + unit : 'Not Available'}}</td>
           </tr>
 
           <tr>
-            <th>ET of Previous 7 Days</th>
+            <th>ETc of Previous 7 Days</th>
             <td>
               <table class="table is-narrow week-table" v-if="weekEt">
                 <thead>
@@ -95,7 +93,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td v-for="et in weekEt[1]">{{et}}</td>
+                    <td v-for="et in weekEt[1]">{{et[0]}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -104,13 +102,85 @@
 
           <tr>
             <th>
-              Graph of Daily ET Values for Date Selected and Previous
+              Graph of Daily ETc Values for Date Selected and Previous
               <input class="input is-small pre-days-input" type="number" v-model="previousDays">
               Days
             </th>
             <td>
               <div class="chart-container">
-                <div id="previousChart"></div>
+                <div id="previousChart0"></div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Daily Reference ET (ETr) Value</th>
+            <td>{{dayEt[1] ? dayEt[1] + ' ' + unit : 'Not Available'}}</td>
+          </tr>
+
+          <tr>
+            <th>ETr of Previous 7 Days</th>
+            <td>
+              <table class="table is-narrow week-table" v-if="weekEt">
+                <thead>
+                  <tr>
+                    <th v-for="d in weekEt[0]">{{d}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td v-for="et in weekEt[1]">{{et[1]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              Graph of Daily ETc & ETr Values for Date Selected and Previous
+              <input class="input is-small pre-days-input" type="number" v-model="previousDays">
+              Days
+            </th>
+            <td>
+              <div class="chart-container">
+                <div id="previousChart1"></div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Daily Crop Coefficient (Kc) Value (ETc/ETr)</th>
+            <td>{{dayEt[2] ? dayEt[2] : 'Not Available'}}</td>
+          </tr>
+
+          <tr>
+            <th>Kc of Previous 7 Days</th>
+            <td>
+              <table class="table is-narrow week-table" v-if="weekEt">
+                <thead>
+                  <tr>
+                    <th v-for="d in weekEt[0]">{{d}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td v-for="et in weekEt[1]">{{et[2]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              Graph of Daily Kc (ETc/ETr) Values for Date Selected and Previous
+              <input class="input is-small pre-days-input" type="number" v-model="previousDays">
+              Days
+            </th>
+            <td>
+              <div class="chart-container">
+                <div id="previousChart2"></div>
               </div>
             </td>
           </tr>
@@ -206,6 +276,30 @@ var site4 = {
 }
 site4.info = makeInfo(site4)
 
+var site5 = {
+  name: 'Brooks 11',
+  abbr: 'Brooks 11',
+  location: 'Ames, IA',
+  position: { lat: 41.974, lng: -93.694 },
+  ecosystem: 'Corn-Soy rotation',
+  elevation: '324.3 m',
+  infoOpened: false,
+  et: {},
+}
+site5.info = makeInfo(site5)
+
+var site6 = {
+  name: 'Brooks 30ft',
+  abbr: 'Brooks 30ft',
+  location: 'Ames, IA',
+  position: { lat: 41.976, lng: -93.693 },
+  ecosystem: 'Mixture of corn and soybean',
+  elevation: '322.4 m',
+  infoOpened: false,
+  et: {},
+}
+site6.info = makeInfo(site6)
+
 
 export default {
   name: 'map-data',
@@ -219,7 +313,7 @@ export default {
       newMapCenter: {lat: 40.8, lng: 97.6},
       mapZoom: 6,
       date: new Date(Date.now() - 86400000),
-      sites: [site1, site2, site3, site4],
+      sites: [site1, site2, site3, site4, site5, site6],
       infoOptions: {
         pixelOffset: {
           width: 0,
@@ -230,7 +324,7 @@ export default {
       growingSeason: ['05-01', '09-15'],
       unit: 'mm',
       previousDays: 7,
-      previousChart: null,
+      previousCharts: [null, null, null],
       growingChart: null,
     }
   },
@@ -249,12 +343,15 @@ export default {
     },
     dayEt () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
-        return
+        return []
       var dayEt = this.activeSite.et[this.year][this.day]
       if(dayEt){
-        dayEt = this.unit == "mm" ? dayEt[2] : (dayEt[2] / 25.4)
-        return this.twoDigits(dayEt)
+        var et = this.unit == "mm" ? dayEt[2] : (dayEt[2] / 25.4)
+        var etr = this.unit == "mm" ? dayEt[4] : (dayEt[4] / 25.4)
+        var kc = parseFloat(etr) == 0.0 ? null : (et / etr)
+        return [et, etr, kc].map(this.twoDigits)
       }
+      return []
     },
     previousEt () {
       if(!this.activeSite || !this.date || !this.activeSite.et[this.year])
@@ -270,13 +367,18 @@ export default {
         var date = this.dayToDate(this.year, day)
         xs.unshift(DateForm(date, "isoDate"))
         if(yearEt[day]){
-          var y = this.unit == "mm" ? yearEt[day][2] : (yearEt[day][2] / 25.4)
-          ys.unshift(this.twoDigits(y))
+          var et = this.unit == "mm" ? yearEt[day][2] : (yearEt[day][2] / 25.4)
+          var etr = null
+          var kc = null
+          if(parseFloat(yearEt[day][4]) != 0){
+            etr = this.unit == "mm" ? yearEt[day][4] : (yearEt[day][4] / 25.4)
+            kc =  et / etr
+          }
+          ys.unshift([et, etr, kc].map(this.twoDigits))
         }else{
-          ys.unshift(null)
+          ys.unshift([null, null, null])
         }
       }
-
       return [xs, ys]
     },
     weekEt () {
@@ -377,6 +479,9 @@ export default {
   },
   methods: {
     openSite (idx) {
+      this.sites.forEach(function(s){
+        s.infoOpened = false
+      })
       this.sites[idx].infoOpened = true
       this.activeSite = this.sites[idx]
       this.requestData()
@@ -432,36 +537,33 @@ export default {
       this.dateSelected(date)
     },
     drawPreviousEt () {
-      var columns = [this.previousEt[0].slice(0), this.previousEt[1].slice(0)]
-      columns[0].unshift('x')
-      columns[1].unshift('Daily ET')
-      if(this.previousChart){
-        this.previousChart.load({
-          columns: columns
-        })
-      }else{
-        this.previousChart = c3.generate({
-          bindto: '#previousChart',
-          padding: {
-            right: 20,
-          },
-          data: {
-            x: 'x',
-            columns: columns,
-          },
-          axis: {
-            x: {
-              type: 'timeseries',
-              tick: {
-                count: 7,
-                format: '%Y-%m-%d'
-              }
-            },
-            y: {
-              min: 0,
-              padding: {bottom:0}
-            }
-          }
+      var columns = [['x'], ['ETc'], ['ETr'], ['Kc']]
+      for(var i=0;i<this.previousEt[0].length;i++){
+        columns[0].push(this.previousEt[0][i])
+        columns[1].push(this.previousEt[1][i][0])
+        columns[2].push(this.previousEt[1][i][1])
+        columns[3].push(this.previousEt[1][i][2])
+      }
+
+      var charts = [
+        {data: [columns[0], columns[1]], type: 'bar'},
+        {data: [columns[0], columns[1], columns[2]], type: 'spline'},
+        {data: [columns[0], columns[3]], type: 'spline'}
+      ]
+      var barWidth = 700 / columns[0].length / 1.5
+
+      for(var i=0;i<charts.length;i++){
+        if(this.previousCharts[i]){
+          this.previousCharts[i] = this.previousCharts[i].destroy()
+        }
+        var vm = this
+        this.previousCharts[i] = c3.generate({
+          bindto: '#previousChart' + i,
+          padding: { right: 20 },
+          data: { x: 'x', columns: charts[i].data, type: charts[i].type, onclick: function (d, element) { vm.dateSelected(d.x) }},
+          bar: { width: barWidth },
+          axis: { x: { type: 'timeseries', tick: { count: 7, format: '%Y-%m-%d' } }, y: { min: 0, padding: {bottom:0} } },
+          zoom: { enabled: true }
         })
       }
     },
@@ -479,28 +581,17 @@ export default {
 
       this.growingChart = c3.generate({
         bindto: '#growingChart',
-        padding: {
-          right: 20,
-        },
-        data: {
-          x: 'x',
-          columns: columns,
-          types: { 'Accum. ET': 'area'},
-        },
-        axis: {
-          x: {
-            type: 'timeseries',
-            tick: {
-              count: 4,
-              format: '%Y-%m-%d'
-            }
-          }
-        },
+        padding: { right: 20 },
+        data: { x: 'x', columns: columns, types: { 'Accum. ET': 'area'}, type: 'spline' },
+        axis: { x: { type: 'timeseries', tick: { count: 4, format: '%Y-%m-%d' } } },
         grid: {x: {lines: lines}},
-        regions: regions
+        regions: regions,
+        zoom: { enabled: true }
       })
     },
     twoDigits (val) {
+      if(!val)
+        return null
       if(val == 0)
         return 0
       var v = val < 0 ? (-val) : val
@@ -514,6 +605,12 @@ export default {
     }
   },
   mounted () {
+    if(this.$route.params.target){
+      var el = document.getElementById(this.$route.params.target)
+      window.scroll(0, el.offsetTop)
+    }else{
+      window.scroll(0, 0)
+    }
   }
 }
 </script>
@@ -524,6 +621,14 @@ export default {
 .data-window {
   margin-top: 15px;
   margin-bottom: 50px;
+}
+
+.station-title {
+  text-align: center;
+  font-weight: bold;
+  color: #05485A;
+  padding: 12px;
+  font-size: 24px;
 }
 
 .week-table {

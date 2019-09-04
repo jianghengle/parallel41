@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MyMain from '@/components/MyMain'
 import About from '@/components/About'
-import PartnersNProjects from '@/components/PartnersNProjects'
+import MapData from '@/components/MapData'
 import Documentation from '@/components/Documentation'
 
 Vue.use(Router)
@@ -20,9 +20,9 @@ export default new Router({
       component: About
     },
     {
-      path: '/partners_n_projects',
-      name: 'PartnersNProjects',
-      component: PartnersNProjects
+      path: '/map-data',
+      name: 'MapData',
+      component: MapData
     },
     {
       path: '/documentation',

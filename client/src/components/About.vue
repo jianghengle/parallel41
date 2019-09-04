@@ -96,6 +96,169 @@
             </div>
           </div>
         </div>
+
+        <h4 class="p-header" id="partners">Partners & Projects</h4>
+        <p>The Daugherty Water for Food Global Institute (DWFI) collaborates with numerous partners, including government agencies, private industry and academic institutions, to obtain the vital resources and expertise needed to implement and maintain the Parallel 41 Flux Network.</p>
+        <p>If you are interested in partnering with DWFI to generate daily ET data for your field or region, or for other inquiries, contact Lacey Bodnar, DWFI Research Project Manager, at <a href="mailto:lbodnar@nebraska.edu">lbodnar@nebraska.edu</a> or +1 402.472.5320 for more information.</p>
+        <br/>
+
+        <div class="parnters-block">
+          <div class="partners">
+            <div class="partner">Upper Republican Natural Resources District (URNRD)</div>
+            <div class="partner">Nebraska Water Balance Alliance (NEWBA)</div>
+            <div class="partner">Irrigation Innovation Consortium (IIC)</div>
+            <div class="partner">Daugherty Water for Food Global Institute (DWFI)</div>
+          </div>
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Funding Sources:</th>
+                <td>UPNRD and IIC</td>
+              </tr>
+              <tr>
+                <th>Tower Name:</th>
+                <td>Grant NE 01</td>
+              </tr>
+              <tr>
+                <th>Tower Specifications:</th>
+                <td>SmartFlux3</td>
+              </tr>
+              <tr>
+                <th>Location Description (nearest town):</th>
+                <td>Grant, NE</td>
+              </tr>
+              <tr>
+                <th>Contact Information:</th>
+                <td>
+                  Nate Jenkins<br/>
+                  Assistant Manager<br/>
+                  Upper Republican NRD<br/>
+                  natejenkins@urnrd.org<br/>
+                  308-882-5173<br/>
+                  <br/>
+                  Dr. Dayle K. McDermitt<br/>
+                  Board of Directors, NEWBA<br/>
+                  Adjunct Professor, Agronomy & Horticulture, UNL<br/>
+                  dayle.mcdermitt@unl.edu<br/>
+                  +1 402.770-6737
+                </td>
+              </tr>
+              <tr>
+                <th>URNRD Project Objectives:</th>
+                <td><a href="static/URNRD Project Objectives.pdf" target="_blank">URNRD Project Objectives.pdf</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <hr/>
+        </div>
+
+        <div class="parnters-block">
+          <div class="partners">
+            <div class="partner">Irrigation Innovation Consortium (IIC)</div>
+            <div class="partner">Daugherty Water for Food Global Institute (DWFI)</div>
+            <div class="partner">U.S. Department of Agriculture (USDA) Agricultural Research Service (ARS)</div>
+            <div class="partner">University of Nebraska Eastern Nebraska Research and Extension Center (ENREC)</div>
+            <div class="partner">University of Nebraska-Lincoln Biological Systems Engineering (UNL BSE)</div>
+          </div>
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Funding Sources:</th>
+                <td>IIC and DWFI</td>
+              </tr>
+              <tr>
+                <th>Tower Name:</th>
+                <td>
+                  Ames IA 01<br/>
+                  Ames IA 02<br/>
+                  Gordon NE 01<br/>
+                  Mead NE 01<br/>
+                  Mead NE 02<br/>
+                  Mead NE 03
+                </td>
+              </tr>
+              <tr>
+                <th>Tower Specifications:</th>
+                <td>SmartFlux3</td>
+              </tr>
+              <tr>
+                <th>Location Description (nearest town):</th>
+                <td>
+                  Ames, IA<br/>
+                  Gordon, NE<br/>
+                  Mead, NE
+                </td>
+              </tr>
+              <tr>
+                <th>Contact Information:</th>
+                <td>
+                  Regarding Ames IA 01, 02:<br/>
+                  John Prueger<br/>
+                  Research Soil Scientist<br/>
+                  USDA ARS<br/>
+                  John.Prueger@ARS.USDA.GOV<br/>
+                  +1 515.294.7694<br/>
+                  <br/>
+                  Regarding Gordon NE 01:<br/>
+                  Dr. Dave Billesbach<br/>
+                  Research Assistant Professor, Biological Systems Engineering<br/>
+                  University of Nebraska-Lincoln<br/>
+                  dbillesbach1@unl.edu<br/>
+                  +1 402.472.7961<br/>
+                  <br/>
+                  Regarding Mead NE 01, 02, 03: <br/>
+                  Dr. Andy Suyker<br/>
+                  Assistant Professor, School of Natural Resources<br/>
+                  University of Nebraska-Lincoln and ENREC<br/>
+                  asuyker1@unl.edu<br/>
+                  +1 402.472.2168
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <hr/>
+        </div>
+
+        <div class="parnters-block">
+          <div class="partners">
+            <div class="partner">The Climate Corporation (TCC)</div>
+            <div class="partner">Irrigation Innovation Consortium (IIC)</div>
+            <div class="partner">Daugherty Water for Food Global Institute (DWFI)</div>
+          </div>
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Funding Sources:</th>
+                <td>TCC, IIC and DWFI</td>
+              </tr>
+              <tr>
+                <th>Tower Name:</th>
+                <td>TBD</td>
+              </tr>
+              <tr>
+                <th>Tower Specifications:</th>
+                <td>TBD</td>
+              </tr>
+              <tr>
+                <th>Location Description (nearest town):</th>
+                <td>TBD</td>
+              </tr>
+              <tr>
+                <th>Contact Information:</th>
+                <td>
+                  Dr. Val Kovalskyy<br/>
+                  Senior Remote Sensing Scientist<br/>
+                  Geospatial Team of The Climate Corporation<br/>
+                  valeriy.kovalskyy@climate.com
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -106,6 +269,14 @@ import Vue from 'vue'
 
 export default {
   name: 'about',
+  mounted () {
+    if(this.$route.params.target){
+      var el = document.getElementById(this.$route.params.target)
+      window.scroll(0, el.offsetTop)
+    }else{
+      window.scroll(0, 0)
+    }
+  }
 }
 </script>
 
@@ -142,6 +313,21 @@ export default {
         margin-top: -5px;
       }
     }
+  }
+}
+
+.parnters-block {
+  margin-bottom: 50px;
+  text-align: center;
+
+  .partners{
+    font-weight: bold;
+    color: #05485A;
+    padding: 12px;
+  }
+
+  tr:hover {
+    background-color: transparent;
   }
 }
 

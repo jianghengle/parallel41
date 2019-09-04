@@ -55,11 +55,11 @@ body {
 
 .main-body {
   min-height: 480px;
-  padding-left: 10px;
-  padding-right: 10px;
 
   .content {
     margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
