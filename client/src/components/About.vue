@@ -1,10 +1,9 @@
 <template>
   <div class="">
-    <div class="container">
+    <div class="container text-container">
       <div class="content text-content">
         <h4 class="p-header">Overview</h4>
-        <p>Increasing food production in a sustainable way is a global challenge of the 21<sup>st</sup> century. To do this, we need to get “more crop per drop.” This means applying precisely the amount of water a plant needs, when it needs it, to achieve the best possible yield. To achieve precise irrigation, we need to know how much water a plant is using on a daily basis, known as evapotranspiration (ET).</p>
-        <p>ET is a very difficult climate and crop parameter to measure directly and yet is critical for field-level water management and irrigation scheduling, as well as assessing water budgets, water productivity, plant stress and drought.</p>
+        <p>Evapotranspiration (ET) is a very difficult climate and crop parameter to measure directly and yet is critical for field-level water management and irrigation scheduling, as well as assessing water budgets, water productivity, plant stress and drought.</p>
 
         <h6 class="p-section">Crop Water Use</h6>
         <p>ET is the sum of evaporation from the land surface plus transpiration from plants (Figure 1).</p>
@@ -39,15 +38,17 @@
 
 
         <h4 class="p-header">Datasets Available</h4>
-        <p>The Parallel 41 website provides real time measurements of ET, in inches or millimeters, at 30-minute increments. This data can also be viewed and downloaded as a daily total or in a 7-day sum. Additional information measured and recorded by the flux towers is available upon request and is useful to track climate variability and change over time, to support benchmarks, planning, goal-setting and policy. The updated equipment acquired for this network, and the resulting real-time gap filled data sets, can also more quickly and accurately model climate change scenarios and the effects on crop yield and water availability. Contact <a href="mailto:s-bsafa1@unl.edu">Babak Safa</a>, DWFI Post-Doctoral Research Associate, to request the following: carbon dioxide flux, soil heat flux, sensible heat flux, net radiation, air temperature, precipitation and other meteorological variables.</p>
+        <p>The Parallel 41 website provides quality controlled, gap filled, and continuous measured ET, in inches or millimeters per day. We also provide daily reference ET (ETr), daily crop coefficient (Kc) and cumulative measured ET during the growing season.</p>
+        <p>Additional information measured and recorded by the flux towers is available upon request and is useful to track climate variability and change over time, to support benchmarks, planning, goal-setting and policy. The updated equipment acquired for this network, and the resulting real-time gap filled data sets, can also more quickly and accurately model climate change scenarios and the effects on crop yield and water availability.</p>
+        <p>Contact <a href="mailto:s-bsafa1@unl.edu">Babak Safa</a>, DWFI Post-Doctoral Research Associate, to request the following: carbon dioxide flux, soil heat flux, sensible heat flux, net radiation, air temperature, precipitation and other meteorological variables.</p>
 
         <h4 class="p-header">Citation Instructions</h4>
         <p>When using Parallel 41 datasets in your work, please provide the following citation:</p>
-        <p>Robert B. Daugherty Water for Food Global Institute. (2019). Parallel 41 Flux Network. University of Nebraska. Lincoln, NE, USA. &lt;parallel41.nebraska.edu&gt;.</p>
+        <p>Robert B. Daugherty Water for Food Global Institute. (Year). Parallel 41 Flux Network. University of Nebraska. Lincoln, NE, USA. &lt;parallel41.nebraska.edu&gt;.</p>
 
         <br/>
         <h4 class="p-header">Development Team</h4>
-        <p>The following people were key leaders for the overall Parallel 41 program. Additional partners are gratefully acknowledged on the Partners & Projects page. </p>
+        <p>The following people were key leaders for the overall Parallel 41 program. Additional partners are gratefully acknowledged in the Partners & Projects section below.</p>
         <div class="columns">
           <div class="column">
             <div class="columns">
@@ -103,15 +104,17 @@
         <br/>
 
         <div class="parnters-block">
-          <div class="partners">
-            <div class="partner">Upper Republican Natural Resources District (URNRD)</div>
-            <div class="partner">Nebraska Water Balance Alliance (NEWBA)</div>
-            <div class="partner">Irrigation Innovation Consortium (IIC)</div>
-            <div class="partner">Daugherty Water for Food Global Institute (DWFI)</div>
-          </div>
-
-          <table class="table">
+          <table class="table blue-table">
             <tbody>
+              <tr>
+                <th>Partners:</th>
+                <td>
+                  Upper Republican NaturalResources District (URNRD)<br/>
+                  Nebraska Water Balance Alliance (NEWBA)<br/>
+                  Irrigation Innovation Consortium (IIC)<br/>
+                  Daugherty Water for Food Global Institute (DWFI)<br/>
+                </td>
+              </tr>
               <tr>
                 <th>Funding Sources:</th>
                 <td>UPNRD and IIC</td>
@@ -150,20 +153,21 @@
               </tr>
             </tbody>
           </table>
-          <hr/>
         </div>
 
         <div class="parnters-block">
-          <div class="partners">
-            <div class="partner">Irrigation Innovation Consortium (IIC)</div>
-            <div class="partner">Daugherty Water for Food Global Institute (DWFI)</div>
-            <div class="partner">U.S. Department of Agriculture (USDA) Agricultural Research Service (ARS)</div>
-            <div class="partner">University of Nebraska Eastern Nebraska Research and Extension Center (ENREC)</div>
-            <div class="partner">University of Nebraska-Lincoln Biological Systems Engineering (UNL BSE)</div>
-          </div>
-
-          <table class="table">
+          <table class="table green-table">
             <tbody>
+              <tr>
+                <th>Partners:</th>
+                <td>
+                  U.S. Department of Agriculture (USDA) Agricultural ResearchService (ARS)<br/>
+                  University of Nebraska Eastern Nebraska Research and Extension Center (ENREC)<br/>
+                  University of Nebraska-Lincoln Biological Systems Engineering (UNL BSE)<br/>
+                  IIC<br/>
+                  DWFI
+                </td>
+              </tr>
               <tr>
                 <th>Funding Sources:</th>
                 <td>IIC and DWFI</td>
@@ -219,18 +223,19 @@
 
             </tbody>
           </table>
-          <hr/>
         </div>
 
         <div class="parnters-block">
-          <div class="partners">
-            <div class="partner">The Climate Corporation (TCC)</div>
-            <div class="partner">Irrigation Innovation Consortium (IIC)</div>
-            <div class="partner">Daugherty Water for Food Global Institute (DWFI)</div>
-          </div>
-
-          <table class="table">
+          <table class="table blue-table">
             <tbody>
+              <tr>
+                <th>Partners:</th>
+                <td>
+                  The Climate Corporation (TCC)<br/>
+                  IIC<br/>
+                  DWFI
+                </td>
+              </tr>
               <tr>
                 <th>Funding Sources:</th>
                 <td>TCC, IIC and DWFI</td>
@@ -282,9 +287,14 @@ export default {
 
 <style lang="scss" scoped>
 
-.text-content {
-  margin-bottom: 30px;
+.text-container {
+  max-width: 800px;
+
+  .text-content {
+    margin-bottom: 30px;
+  }
 }
+
 
 .p-header{
   font-weight: bold;
@@ -300,7 +310,7 @@ export default {
   text-align: center;
 
   .figure-container {
-    width: 400px;
+    width: 385px;
     height: 360px;
     display: inline-block;
 
@@ -320,10 +330,12 @@ export default {
   margin-bottom: 50px;
   text-align: center;
 
-  .partners{
-    font-weight: bold;
-    color: #05485A;
-    padding: 12px;
+  .blue-table {
+    background-color: #dbf1fd;
+  }
+
+  .green-table {
+    background-color: #f0fff0;
   }
 
   tr:hover {

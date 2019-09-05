@@ -61,10 +61,10 @@ export default {
 
   .image-notation {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 10px;
+    right: 10px;
     color: white;
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
   }
 }

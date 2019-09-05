@@ -8,7 +8,7 @@
           </a>
         </div>
 
-        <div class="top-bar-right">
+        <!--<div class="top-bar-right">
           <router-link class="top-bar-item" :to="'/help'">
             <span class="nav-icon"><icon name="question"></icon></span>Help
           </router-link>
@@ -18,7 +18,7 @@
           <a v-if="token" class="top-bar-item" @click="logout">
             <span class="nav-icon"><icon name="sign-out"></icon></span>Logout
           </a>
-        </div>
+        </div>-->
       </div>
     </div>
 

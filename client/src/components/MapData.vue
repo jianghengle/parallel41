@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div>
+    <div class="container">
+      <div class="content text-content">
+        <h4 class="p-header">Get Started</h4>
+        <p>Pins on the map represent flux station locations. Click a point to view data. Data and graphs will appear below the map.</p>
+      </div>
+
       <gmap-map
         ref="map"
         :center="mapCenter"
@@ -617,6 +622,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+
+.text-content {
+  margin-bottom: 15px;
+}
+
+.p-header{
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: #05485A;
+}
 
 .data-window {
   margin-top: 15px;
