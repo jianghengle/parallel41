@@ -1,5 +1,5 @@
 <template>
-  <div class="login-page">
+  <div class="container login-page" id="pageContainer">
     <div class="columns">
       <div class="column is-narrow">
         <aside class="menu sider-bar">
@@ -15,7 +15,6 @@
             Tutorials
           </p>
           <ul class="menu-list">
-            <li><a @click="scrollToElement('quickStart')">Parallel 41 Quick Start Guide</a></li>
             <li><a @click="scrollToElement('stepByStep')">Step-by-Step Guide to Flux Measurements</a></li>
           </ul>
           <p class="menu-label">
@@ -30,7 +29,7 @@
         <div class="main-container">
           <div class="content text-content">
             <h4 id="lecture1" class="p-header">Eddy Covariance Data Analysis for Grant, NE
-              <a href="static/Eddy Covariance Data Analysis from Grant NE.pdf" class="button is-text" download>link</a>
+              <a href="static/Eddy Covariance Data Analysis for Grant NE.pdf" class="button is-text" download>link</a>
             </h4>
             <canvas id="the-canvas"></canvas>
             <div class="field has-addons has-addons-centered page-buttons">
@@ -48,10 +47,6 @@
                 </a>
               </p>
             </div>
-          </div>
-          <div class="content text-content">
-            <h4 id="quickStart" class="p-header">Parallel 41 Quick Start Guide (In Development)
-            </h4>
           </div>
           <div class="content text-content">
             <h4 id="stepByStep" class="p-header">Excerpt from Step-by-Step Guide to Flux Measurements
@@ -105,11 +100,8 @@ export default {
       var vm = this
       vm.rendering = true
       vm.pdf.getPage(vm.page).then(function(page) {
-        var windowWidth = window.innerWidth
-        var containerWidth = window.innerWidth - 300
-        if(windowWidth <= 768){
-          containerWidth = windowWidth
-        }
+        var container = document.getElementById('pageContainer')
+        var containerWidth = container.offsetWidth - 300
         var canvas = document.getElementById('the-canvas')
         var context = canvas.getContext('2d')
 
@@ -172,7 +164,7 @@ export default {
   },
   mounted () {
     var vm = this
-    pdfjsLib.getDocument('static/Eddy Covariance Data Analysis from Grant NE.pdf').then(function(pdf) {
+    pdfjsLib.getDocument('static/Eddy Covariance Data Analysis for Grant NE.pdf').then(function(pdf) {
       vm.pdf = pdf
       vm.numPages = pdf.numPages
       vm.renderPage()

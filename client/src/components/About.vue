@@ -14,7 +14,7 @@
           <div class="figure-container">
             <div class="figure">
               <img src="static/About_Figure1.jpg" width="350">
-              <div class="figure-caption">Figure 1: ET as part of the water cycle Image Source: USGS</div>
+              <div class="figure-caption">Figure 1: ET as part of the water cycle. Image Source: USGS</div>
             </div>
           </div>
           
@@ -36,7 +36,7 @@
           <div class="has-text-weight-bold has-text-centered">Figure 3: Strategy for Measuring ET at large spatial scales</div>
         </div>
 
-
+        <p></p>
         <h4 class="p-header">Datasets Available</h4>
         <p>The Parallel 41 website provides quality controlled, gap filled, and continuous measured ET, in inches or millimeters per day. We also provide daily reference ET (ETr), daily crop coefficient (Kc) and cumulative measured ET during the growing season.</p>
         <p>Additional information measured and recorded by the flux towers is available upon request and is useful to track climate variability and change over time, to support benchmarks, planning, goal-setting and policy. The updated equipment acquired for this network, and the resulting real-time gap filled data sets, can also more quickly and accurately model climate change scenarios and the effects on crop yield and water availability.</p>
@@ -104,9 +104,9 @@
         <br/>
 
         <div class="parnters-block">
-          <table class="table blue-table">
+          <table class="table">
             <tbody>
-              <tr>
+              <tr class="blue-table">
                 <th>Partners:</th>
                 <td>
                   Upper Republican NaturalResources District (URNRD)<br/>
@@ -115,50 +115,46 @@
                   Daugherty Water for Food Global Institute (DWFI)<br/>
                 </td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Funding Sources:</th>
                 <td>UPNRD and IIC</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Tower Name:</th>
                 <td>Grant NE 01</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Tower Specifications:</th>
                 <td>SmartFlux3</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Location Description (nearest town):</th>
                 <td>Grant, NE</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Contact Information:</th>
                 <td>
                   Nate Jenkins<br/>
                   Assistant Manager<br/>
                   Upper Republican NRD<br/>
                   natejenkins@urnrd.org<br/>
-                  308-882-5173<br/>
+                  +1 308.882.5173<br/>
                   <br/>
                   Dr. Dayle K. McDermitt<br/>
                   Board of Directors, NEWBA<br/>
                   Adjunct Professor, Agronomy & Horticulture, UNL<br/>
                   dayle.mcdermitt@unl.edu<br/>
-                  +1 402.770-6737
+                  +1 402.770.6737
                 </td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>URNRD Project Objectives:</th>
                 <td><a href="static/URNRD Project Objectives.pdf" target="_blank">URNRD Project Objectives.pdf</a></td>
               </tr>
-            </tbody>
-          </table>
-        </div>
 
-        <div class="parnters-block">
-          <table class="table green-table">
-            <tbody>
-              <tr>
+              <tr class="my-seperator"></tr>
+
+              <tr class="green-table">
                 <th>Partners:</th>
                 <td>
                   U.S. Department of Agriculture (USDA) Agricultural ResearchService (ARS)<br/>
@@ -168,11 +164,11 @@
                   DWFI
                 </td>
               </tr>
-              <tr>
+              <tr class="green-table">
                 <th>Funding Sources:</th>
                 <td>IIC and DWFI</td>
               </tr>
-              <tr>
+              <tr class="green-table">
                 <th>Tower Name:</th>
                 <td>
                   Ames IA 01<br/>
@@ -183,11 +179,11 @@
                   Mead NE 03
                 </td>
               </tr>
-              <tr>
+              <tr class="green-table">
                 <th>Tower Specifications:</th>
                 <td>SmartFlux3</td>
               </tr>
-              <tr>
+              <tr class="green-table">
                 <th>Location Description (nearest town):</th>
                 <td>
                   Ames, IA<br/>
@@ -195,7 +191,7 @@
                   Mead, NE
                 </td>
               </tr>
-              <tr>
+              <tr class="green-table">
                 <th>Contact Information:</th>
                 <td>
                   Regarding Ames IA 01, 02:<br/>
@@ -221,14 +217,9 @@
                 </td>
               </tr>
 
-            </tbody>
-          </table>
-        </div>
+              <tr class="my-seperator"></tr>
 
-        <div class="parnters-block">
-          <table class="table blue-table">
-            <tbody>
-              <tr>
+              <tr class="blue-table">
                 <th>Partners:</th>
                 <td>
                   The Climate Corporation (TCC)<br/>
@@ -236,23 +227,23 @@
                   DWFI
                 </td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Funding Sources:</th>
                 <td>TCC, IIC and DWFI</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Tower Name:</th>
                 <td>TBD</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Tower Specifications:</th>
                 <td>TBD</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Location Description (nearest town):</th>
                 <td>TBD</td>
               </tr>
-              <tr>
+              <tr class="blue-table">
                 <th>Contact Information:</th>
                 <td>
                   Dr. Val Kovalskyy<br/>
@@ -334,14 +325,22 @@ export default {
     background-color: #dbf1fd;
   }
 
+  .blue-table:hover {
+    background-color: #dbf1fd;
+  }
+
   .green-table {
     background-color: #f0fff0;
   }
 
-  tr:hover {
-    background-color: transparent;
+  .green-table:hover {
+    background-color: #f0fff0;
   }
 }
 
+
+.my-seperator {
+  height: 60px;
+}
 
 </style>

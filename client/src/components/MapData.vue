@@ -119,12 +119,12 @@
           </tr>
 
           <tr>
-            <th>Daily Reference ET (ETr) Value</th>
+            <th>Daily Reference ET (ETr) Value &nbsp;&nbsp;<span class="is-size-7 has-text-grey">Source: HPRCC</span></th>
             <td>{{dayEt[1] ? dayEt[1] + ' ' + unit : 'Not Available'}}</td>
           </tr>
 
           <tr>
-            <th>ETr of Previous 7 Days</th>
+            <th>ETr of Previous 7 Days &nbsp;&nbsp;<span class="is-size-7 has-text-grey">Source: HPRCC</span></th>
             <td>
               <table class="table is-narrow week-table" v-if="weekEt">
                 <thead>

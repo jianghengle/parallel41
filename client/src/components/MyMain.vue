@@ -74,7 +74,7 @@ export default {
 
   .intro-text {
     margin: auto;
-    max-width: 600px
+    max-width: 800px
   }
 }
 
